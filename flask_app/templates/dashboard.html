@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>User Dashboard</h1>
+    <p>Welcome, {{ loggedUser.first_name }}!</p>
+    
+    <h2>Your Vehicles</h2>
+    <ul>
+        {% for vehicle in vehicles %}
+            <li><a href="/view/vehicle/{{ vehicle.id }}">{{ vehicle.model }} - {{ vehicle.type }}</a></li>
+        {% endfor %}
+    </ul>
+    
+    <h2>Your Orders</h2>
+    <ul>
+        {% for order in userOrders %}
+            <li>{{ order.start_date }} to {{ order.end_date }} - Total: ${{ order.total_price }}</li>
+        {% endfor %}
+    </ul>
+    
+    <a href="/logout">Logout</a>
+</body>
+</html>

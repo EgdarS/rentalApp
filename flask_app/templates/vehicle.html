@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Vehicle</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Edit Vehicle</h1>
+    <form action="/update/vehicle/{{ vehicle.id }}" method="post">
+        <label for="type">Type:</label>
+        <input type="text" name="type" id="type" value="{{ vehicle.type }}" required><br>
+        
+        <label for="model">Model:</label>
+        <input type="text" name="model" id="model" value="{{ vehicle.model }}" required><br>
+        
+        <label for="price">Price:</label>
+        <input type="number" name="price" id="price" value="{{ vehicle.price }}" required><br>
+        
+        <label for="description">Description:</label>
+        <textarea name="description" id="description" required>{{ vehicle.description }}</textarea><br>
+        
+        <input type="submit" value="Update Vehicle">
+    </form>
+    <a href="/">Back to Home</a>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Your Orders</h2>
+<ul>
+    {% for order in orders %}
+        <li>
+            Vehicle ID: {{ order.vehicle_id }} | Start Date: {{ order.start_date }} | End Date: {{ order.end_date }} | Total Price: ${{ order.total_price }}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}

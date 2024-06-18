@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1>Admin Dashboard</h1>
+    <p>Welcome, {{ loggedAdmin.first_name }} {{ loggedAdmin.last_name }}!</p>
+
+    <h2>All Vehicles</h2>
+    <ul>
+        {% for vehicle in vehicles %}
+        <div class="vehicle-card">
+            <h3>{{ vehicle.type }} - {{ vehicle.model }}</h3>
+            <p>Description: {{ vehicle.description }}</p>
+            <p>Price: ${{ vehicle.price }}</p>
+        </div>
+        {% endfor %}
+
+    </ul>
+
+    <h2>All Orders</h2>
+    <ul>
+        {% for order in allOrders %}
+        <li>{{ order.start_date }} to {{ order.end_date }} - Total: ${{ order.total_price }}</li>
+        {% endfor %}
+    </ul>
+
+    <a href="/add/vehicle">Add Vehicle</a>
+    <a href="/logout">Logout</a>
+</body>
+
+</html>

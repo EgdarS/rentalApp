@@ -41,7 +41,7 @@ def admin_required(f):
 def controller():
     if 'user_id' not in session:
         return redirect('/logout')
-    return redirect('/dashboard')
+    return redirect('/home')
 
 @app.route('/login')
 def loginPage():
@@ -63,6 +63,12 @@ def loginUser():
     session['user_id'] = user['id']
     session['role'] = user['role']  # Store the role in the session
     return redirect('/')
+
+@app.route('/register')
+def registerPage():
+    if 'user_id' in session:
+        return redirect('/')
+    return render_template('register.html')
 
 @app.route('/register', methods=['POST'])
 def registerUser():
@@ -92,11 +98,14 @@ def admin_dashboard():
         'role': 'admin',
     }
     vehicles = Vehicle.getAllVehicles()
-    return render_template('admin_dashboard.html', loggedAdmin=admin_data,)
-
+    return render_template('admin_dashboard.html', loggedAdmin=admin_data,vehicles = vehicles)
 
 @app.route('/dashboard')
 def dashboard():
+    return render_template('dashboard.html')
+
+@app.route('/home')
+def home():
     if 'user_id' not in session:
         return redirect('/')
     vehicles = Vehicle.getAllVehicles()
@@ -105,7 +114,7 @@ def dashboard():
     }
     loggedUser = User.get_user_by_id(data)
     usersWhoFavourited = Vehicle.getAllFavourites(data)
-    return render_template('dashboard.html', vehicles=vehicles, loggedUser=loggedUser, usersWhoFavourited=usersWhoFavourited)
+    return render_template('home.html', vehicles=vehicles, loggedUser=loggedUser, usersWhoFavourited=usersWhoFavourited)
 
 @app.route('/logout')
 def logout():

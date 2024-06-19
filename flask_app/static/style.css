@@ -1,104 +1,137 @@
-/* General Styles */
+
 body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    padding: 20px;
+margin: 0;
+font-family: Arial, sans-serif;
 }
 
-h1, h2 {
-    color: #333;
+header {
+background-color: rgb(255 95 0);
+padding: 10px 0;
+position: fixed;
+width: 100%;
+top: 0;
+z-index: 1000;
 }
 
-a {
-    color: #007bff;
-    text-decoration: none;
-    margin-right: 10px;
+.container {
+display: flex;
+justify-content: space-between;
+align-items: center;
+max-width: 1200px;
+margin: 0 auto;
+padding: 0 20px;
 }
 
-a:hover {
-    text-decoration: underline;
+.logo h1 {
+color: #fff;
+margin: 0;
 }
 
-ul {
-    list-style-type: none;
-    padding: 0;
+nav ul {
+list-style: none;
+margin: 0;
+padding: 0;
+display: flex;
 }
 
-li {
-    margin-bottom: 10px;
+nav ul li {
+margin-left: 20px;
 }
 
-/* Form Styles */
-form {
-    margin-bottom: 20px;
+nav ul li a {
+color: #fff;
+text-decoration: none;
+font-weight: bold;
+transition: color 0.3s;
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
+nav ul li a:hover {
+color: #f0a500;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"],
-textarea {
+.hero {
+background-image: url("../static/images/2.jpg");
+background-size: cover;
+background-position: center;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+color: white;
+padding-top: 60px; /* Add padding to account for the fixed header */
+}
+
+.hero-content {
+background-color: rgba(0, 0, 0, 0.5); /* semi-transparent background for readability */
+padding: 20px;
+border-radius: 10px;
+}
+
+.hero-content h2 {
+font-size: 3em;
+margin: 0;
+}
+
+.hero-content p {
+font-size: 1.2em;
+margin: 10px 0 0;
+}
+
+/* Styles for the popup container */
+.popup {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4); /* Overlay background */
 }
 
-input[type="submit"] {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
+/* Styles for the popup content */
+.popup-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
 }
 
-input[type="submit"]:hover {
-    background-color: #0056b3;
-}
-
-/* Dashboard Styles */
-.user-info {
-    background-color: #f0f0f0;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.user-info h2 {
-    margin-top: 0;
-}
-
-.admin-info {
-    background-color: #f0f0f0;
-    padding: 10px;
-    margin-bottom: 20px;
-}
-
-.admin-info h2 {
-    margin-top: 0;
-}
-
-.logout-link {
+/* Close button (x) */
+.close {
+    color: #aaa;
     float: right;
-    margin-top: -30px;
+    font-size: 28px;
+    font-weight: bold;
 }
 
-/* Responsive Design (Optional) */
-@media (max-width: 768px) {
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    textarea {
-        width: 100%;
-    }
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 
-    input[type="submit"] {
-        width: 100%;
+/* Adjustments for small screens */
+@media screen and (max-width: 700px) {
+    .popup-content {
+        width: 90%;
     }
+}
+.flash-message {
+    background-color: #f0c14b;
+    color: #111;
+    padding: 10px;
+    text-align: center;
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    border: 1px solid #e2b53a;
+    border-radius: 5px;
 }

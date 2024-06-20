@@ -2,28 +2,66 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saranda Rentals</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>User Dashboard</h1>
-    <p>Welcome, {{ loggedUser.first_name }}!</p>
+    <header>
+        <div class="container">
+            <h1>Saranda Rentals</h1>
+            <nav>
+                <ul>
+                    <li><a href="/dashboard" onclick="showMessage()">Dashboard</a></li>
+                    <li><a href="#" onclick="openLoginForm()">Login</a></li>
+                    <li><a href="#" onclick="openRegisterForm()">Register</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
     
-    <h2>Your Vehicles</h2>
-    <ul>
-        {% for vehicle in vehicles %}
-            <li><a href="/view/vehicle/{{ vehicle.id }}">{{ vehicle.model }} - {{ vehicle.type }}</a></li>
-        {% endfor %}
-    </ul>
-    
-    <h2>Your Orders</h2>
-    <ul>
-        {% for order in userOrders %}
-            <li>{{ order.start_date }} to {{ order.end_date }} - Total: ${{ order.total_price }}</li>
-        {% endfor %}
-    </ul>
-    
-    <a href="/logout">Logout</a>
+    <div id="flashMessage" class="flash-message" style="display: none;">
+        Please log in or register to continue.
+    </div>
+
+    <!-- Popup Login Form -->
+    <div id="loginPopup" class="popup">
+        <form class="popup-content" action="/login" method="POST">
+            <span class="close" onclick="closeLoginForm()">&times;</span>
+            <h2>Login</h2>
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Enter Email" name="email" required>
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+
+    <!-- Popup Register Form -->
+    <div id="registerPopup" class="popup">
+        <form class="popup-content" action="/register" method="POST">
+            <span class="close" onclick="closeRegisterForm()">&times;</span>
+            <h2>Register</h2>
+            <label for="first_name"><b>First Name</b></label>
+            <input type="text" placeholder="Enter First Name" name="first_name" required>
+            <label for="last_name"><b>Last Name</b></label>
+            <input type="text" placeholder="Enter Last Name" name="last_name" required>
+            <label for="email"><b>Email</b></label>
+            <input type="email" placeholder="Enter Email" name="email" required>
+            <label for="password"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="password" required>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>DON'T RENT ANY CAR.</h2>
+            <h2>RENT THE CAR.</h2>
+            <p>Premium car rentals at affordable rates.</p>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>
-

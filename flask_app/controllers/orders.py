@@ -11,15 +11,20 @@ from datetime import timedelta, datetime
 def new_order(vehicle_id):
     if 'user_id' not in session:
         return redirect('/login')
-    data = {'id': vehicle_id}
-    vehicle = Vehicle.get_vehicle_by_id(data)
-    if not vehicle:
-        flash('Vehicle not found', 'error')
-        return redirect('/dashboard')
-    return render_template('new_order.html', vehicle=vehicle)
+    
+    vehicle = Vehicle.get_vehicle_by_id({'id': vehicle_id})
+    
+    # if not vehicle:
+    #     flash('Vehicle not found', 'error')
+    #     return redirect('/dashboard')
+    
+    all_vehicle_models = Vehicle.get_all_vehicle_models()
+    
+    return render_template('new_order.html', vehicle=vehicle, all_vehicle_models=all_vehicle_models)
+
 
 @app.route('/orders/create', methods=['POST'])
-def create_order():
+def orders_create():
     if 'user_id' not in session:
         return redirect('/login')
     start_date = request.form['start_date']

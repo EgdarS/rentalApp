@@ -100,12 +100,12 @@ def admin_dashboard():
     vehicles = Vehicle.getAllVehicles()
     return render_template('admin_dashboard.html', loggedAdmin=admin_data,vehicles = vehicles)
 
-@app.route('/dashboard')
-def dashboard():
-    return render_template('dashboard.html')
-
 @app.route('/home')
 def home():
+    return render_template('home.html')
+
+@app.route('/dashboard')
+def dashboard():
     if 'user_id' not in session:
         return redirect('/')
     vehicles = Vehicle.getAllVehicles()
@@ -114,7 +114,7 @@ def home():
     }
     loggedUser = User.get_user_by_id(data)
     usersWhoFavourited = Vehicle.getAllFavourites(data)
-    return render_template('home.html', vehicles=vehicles, loggedUser=loggedUser, usersWhoFavourited=usersWhoFavourited)
+    return render_template('dashboard.html', vehicles=vehicles, loggedUser=loggedUser, usersWhoFavourited=usersWhoFavourited)
 
 @app.route('/logout')
 def logout():

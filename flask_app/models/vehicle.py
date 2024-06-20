@@ -24,7 +24,7 @@ class Vehicle:
         query = 'SELECT * FROM vehicles;'
         results = connectToMySQL(cls.db_name).query_db(query)
         vehicles= []
-        if vehicles:
+        if results:
             for vehicle in results:
                 vehicles.append(vehicle)
         return vehicles
@@ -62,6 +62,14 @@ class Vehicle:
     def delete_users_vehicles(cls,data):
         query = 'DELETE FROM vehicles Where vehicles.user_id=%(user_id)s;'
         return connectToMySQL(cls.db_name).query_db(query, data)
+    
+    @classmethod
+    def get_all_vehicle_models(cls):
+        query = "SELECT DISTINCT model FROM vehicles;"
+        results = connectToMySQL(cls.db_name).query_db(query)
+        if results:
+            return [result['model'] for result in results]
+        return []
     
     @classmethod
     def addFavourite(cls,data):

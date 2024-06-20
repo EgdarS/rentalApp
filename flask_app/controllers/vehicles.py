@@ -62,7 +62,7 @@ def createVehicle():
         'user_id': session['user_id']
     }
     Vehicle.create(data)
-    return redirect('/')
+    return redirect('/admin/dashboard')
 
 
 @app.route('/view/vehicle/<int:id>')
@@ -75,8 +75,8 @@ def viewVehicle(id):
     }
     vehicle = Vehicle.get_vehicle_by_id(data)
     loggedUser = User.get_user_by_id(data)
-    usersWhoFavourited=Vehicle.getAllFavourites(data)
-    return render_template('vehicle.html', vehicle=vehicle, loggedUser=loggedUser, usersWhoFavourited=usersWhoFavourited)
+    # usersWhoFavourited=Vehicle.getAllFavourites(data)
+    return render_template('vehicle.html', vehicle=vehicle, loggedUser=loggedUser) #usersWhoFavourited=usersWhoFavourited
 
 @app.route('/delete/vehicle/<int:id>')
 @admin_required
@@ -90,7 +90,7 @@ def deleteVehicle(id):
         return redirect('/')
     Vehicle.delete_all_favourites(data)
     Vehicle.delete_vehicle(data)
-    return redirect('/')
+    return redirect('/admin/dashboard')
 
 @app.route('/edit/vehicle/<int:id>')
 @admin_required
@@ -123,7 +123,7 @@ def updateVehicle(id):
         return redirect(request.referrer)
     Vehicle.update_vehicle(updateData)
     #return redirect('/view/vehicle/'+str(id))           this redirects to the updated page after the changes 
-    return redirect('/')
+    return redirect('/admin/dashboard')
     
 @app.route('/favourite/<int:id>')
 def addFavourite(id):

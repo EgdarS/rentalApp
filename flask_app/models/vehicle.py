@@ -47,6 +47,14 @@ class Vehicle:
         if results:
             return results[0]
         return False
+
+    @classmethod
+    def get_vehicle_by_id2(cls, data):
+        query = "SELECT * FROM vehicles WHERE id = %(id)s;"
+        result = connectToMySQL(cls.db_name).query_db(query, data)
+        if result:
+            return result[0] 
+        return None
     
     @classmethod
     def delete_vehicle(cls,data):

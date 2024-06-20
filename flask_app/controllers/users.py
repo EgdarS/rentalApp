@@ -62,7 +62,7 @@ def loginUser():
         return redirect(request.referrer)
     session['user_id'] = user['id']
     session['role'] = user['role']  # Store the role in the session
-    return redirect('/')
+    return redirect('/dashboard')
 
 @app.route('/register')
 def registerPage():
@@ -88,7 +88,7 @@ def registerUser():
     }
     user_id = User.create(data)
     session['user_id'] = user_id
-    return redirect('/')
+    return redirect('/dashboard')
 
 @app.route('/admin/dashboard')
 @admin_required
@@ -119,4 +119,4 @@ def dashboard():
 @app.route('/logout')
 def logout():
     session.clear()
-    return redirect('/login')
+    return redirect('/home')

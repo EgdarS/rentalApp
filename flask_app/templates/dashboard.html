@@ -99,8 +99,16 @@ header h1 {
             <nav>
                 <ul class="nav">
                     <li class="nav-item">
+                        <a class="nav-link" href="/orders">Orders</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/logout">Logout</a>
                     </li>
+                    {% if loggedUser.role == 'admin' %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/dashboard">Admin Dashboard</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </nav>
         </div>

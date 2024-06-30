@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saranda Rentals - 2FA Verification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Saranda Rentals</h1>
+            <nav>
+                <ul>
+                    <li><a href="/home">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div id="flashMessage" class="flash-message">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Two-Factor Authentication</h2>
+            <p>Please enter the verification code sent to your email.</p>
+            <form action="{{ url_for('verify_2fa') }}" method="POST" class="popup-content">
+                <label for="token"><b>Verification Code</b></label>
+                <input type="text" placeholder="Enter Verification Code" name="token" required>
+                <button type="submit">Verify</button>
+            </form>
+        </div>
+    </section>
+
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</body>
+</html>
